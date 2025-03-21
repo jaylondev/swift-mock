@@ -28,11 +28,11 @@
 ```java
 public class UserServiceTest extends SpyMockTest {
 
-    private UserService userService = new UserService();
+    private UserService userService;
     
     @Override
     public Object targetTestBean() {
-        return userService;
+        return userService = new UserService();
     }
 
     @Test
