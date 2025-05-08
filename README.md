@@ -1,6 +1,6 @@
 # SwiftMock
 
-**SwiftMock** 是一个基于 **Mockito** 的轻量级 **Spy Mocking** 框架，专为单元测试设计。它能够 **自动解析被测试类的依赖关系，并为其依赖项创建 Spy 实例**，无需用户手动管理依赖 **Mock**，只需直接定义 **Mock** 行为，提高测试编写效率。
+**SwiftMock** 是一个基于 **Mockito** 的轻量级 **Spy Mocking** 框架。执行单元测试时，它能够 **自动解析被测试类的依赖关系，并为其依赖项创建 Spy 实例**，无需用户手动管理依赖 **Mock**，只需直接定义 **Mock** 行为，提高测试编写效率。
 相较于 **SwiftBootTest** ，**SwiftMock** 不依赖特定的 **DI框架** 或运行环境，可直接集成到 **Spring**、**Spring Boot**、**SOFABoot** 或其他java项目中使用。
 ## ✨ 特性
 - **自动创建 Spy Mock**：递归扫描测试对象，自动创建 **Spy**（部分真实、部分 Mock）实例。
