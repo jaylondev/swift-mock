@@ -30,12 +30,19 @@ public class MockInitializer {
             if (shouldSkipField(instance, field)) continue;
 
             Object mockInstance = mockRegistry.getOrCreateSpy(field.getType());
-            field.set(instance, mockInstance);
+            this.setFieldValue(instance, field, mockInstance);
 
-            if (!ignoreRules.isAlreadyMocked(mockInstance.getClass())) {
+            if (!ignoreRules.isAlreadyMocked(mockInstance)) {
                 initializeMocksRecursively(mockInstance);
             }
         }
+    }
+
+    private void setFieldValue(Object instance, Field field, Object mockInstance) throws IllegalAccessException {
+        if (mockInstance == null) {
+            return;
+        }
+        field.set(instance, mockInstance);
     }
 
 

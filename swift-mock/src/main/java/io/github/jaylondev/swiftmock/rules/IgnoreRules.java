@@ -1,5 +1,6 @@
 package io.github.jaylondev.swiftmock.rules;
 
+import io.github.jaylondev.swiftmock.annotations.ExcludeClasses;
 import io.github.jaylondev.swiftmock.annotations.IgnoreSpy;
 import io.github.jaylondev.swiftmock.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,10 @@ public class IgnoreRules {
             Collections.addAll(ignoredClasses, ignoreSpy.classes());
             ignoredClassSuffixes.addAll(Arrays.asList(ignoreSpy.classSuffixes()));
         }
+        ExcludeClasses excludeClasses = testClass.getAnnotation(ExcludeClasses.class);
+        if (excludeClasses != null) {
+            Collections.addAll(ignoredClasses, excludeClasses.classes());
+        }
     }
 
     public boolean shouldSkipClass(Class<?> clazz) {
@@ -35,8 +40,11 @@ public class IgnoreRules {
         return shouldSkip;
     }
 
-    public boolean isAlreadyMocked(Class<?> clazz) {
-        return mockedClasses.contains(clazz);
+    public boolean isAlreadyMocked(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return mockedClasses.contains(obj.getClass());
     }
 
 

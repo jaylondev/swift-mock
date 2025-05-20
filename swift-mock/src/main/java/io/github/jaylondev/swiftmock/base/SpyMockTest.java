@@ -17,8 +17,8 @@ public abstract class SpyMockTest {
             Object testObject = targetTestBean();
             this.ignoreRules = new IgnoreRules(this.getClass());
             TargetFilesClassesContainer.getInstance().scanTargetClasses(this.getClass());
-            Object spyTestBean = mockRegistry.getOrCreateSpy(testObject.getClass());
-            new MockInitializer(mockRegistry, ignoreRules).initializeMocksRecursively(spyTestBean);
+            mockRegistry.addContainer(testObject);
+            new MockInitializer(mockRegistry, ignoreRules).initializeMocksRecursively(testObject);
         } catch (Exception e) {
             throw new IllegalStateException("SpyMockTest initialization failed due to: " + e.getMessage(), e);
         }
