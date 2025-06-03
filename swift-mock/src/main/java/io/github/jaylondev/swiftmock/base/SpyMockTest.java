@@ -14,11 +14,12 @@ public abstract class SpyMockTest {
 
     public SpyMockTest() {
         try {
+            mockRegistry.clear();
             Object testObject = targetTestBean();
             this.ignoreRules = new IgnoreRules(this.getClass());
             TargetFilesClassesContainer.getInstance().scanTargetClasses(this.getClass());
-            mockRegistry.addContainer(testObject);
-            new MockInitializer(mockRegistry, ignoreRules).initializeMocksRecursively(testObject);
+            Object spyTestBean = mockRegistry.getOrCreateSpy(testObject.getClass());
+            new MockInitializer(mockRegistry, ignoreRules).initializeMocksRecursively(spyTestBean);
         } catch (Exception e) {
             throw new IllegalStateException("SpyMockTest initialization failed due to: " + e.getMessage(), e);
         }

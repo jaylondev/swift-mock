@@ -45,4 +45,8 @@ public class MockRegistry {
     }
 
 
+    public void clear() {
+        MOCK_MAP.clear();
+    }
+
 }
